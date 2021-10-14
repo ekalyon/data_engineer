@@ -1,0 +1,43 @@
+#import libraries
+import requests
+import pandas as pd
+import time
+
+
+#keys
+#API_KEY = "AIXXXXXXXX"
+#CHANNEL_ID = "UCW8Ews7tdKKkBT6GdtQaXvQ"
+
+#make API call
+response = requests.get('https://www.cryptingup.com/api/assets/USD/markets').json()
+
+exchange_id = 'USD'
+exchange_id = 'COINBASE'
+symbol='BTC-USD'
+base_asset='BTC'
+quote_asset='USD'
+price_unconverted=57302.165
+price=57302.165
+change_24h=0.05107999576064387
+spread=0.003507659349377637
+volume_24h=754147234.5357157
+status='recent'
+created_at='2021-09-21T01:21:25'
+updated_at='2021-10-14T19:26:29.074516'
+
+
+
+
+df = pd.DataFrame(columns=["exchange_id","symbol","base_asset","quote_asset","price_unconverted","price","change_24h","spread","volume_24h","status","recent","created_at","updated_at"])
+
+#df = df.append({'exchange_id':exchange_id,'symbol':symbol,'base_asset':base_asset,'quote_asset':quote_asset,'price_unconverted':price_unconverted,'price':price,'change_24h':change_24h,'spread':spread,'volume_24h':volume_24h,'status':status,'recent':recent,'created_at':created_at,'updated_at':updated_at},ignore_index=True)
+
+for asset in response:
+    df = df.append({'exchange_id': exchange_id, 'symbol': symbol, 'base_asset': base_asset, 'quote_asset': quote_asset,
+                    'price_unconverted': price_unconverted, 'price': price, 'change_24h': change_24h, 'spread': spread,
+                    'volume_24h': volume_24h, 'status': status, 'created_at': created_at,
+                    'updated_at': updated_at}, ignore_index=True)
+
+df.head()
+
+
